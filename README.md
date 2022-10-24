@@ -20,15 +20,31 @@ Flow, Kotlin Coroutines, Material 3, Jetpack Compose
 
 **Architecture:** MVVM, Clean Architecture
 
+## To do list
+- Add Posts
+- Forgot Password
 
-
+- Notification
+   - Get notifications when a followed user posts or shares stories
+   - Get notification in when the new followers arrive and post is liked
+  
+- Follow
+   - Follow and unfollow user
+   - Show posts from followed users
+   
+- Comments
+   - Add Comment
+   - Reply to comments and like comments
+   
+- User Profile
+   - Showing user posts and comments in profile screen
+   - Showing user following and followers
 
 ## Screenshots
 
 | Login Screen | Register Screen | Home Screen |
 | :-------- | :------- | :------- |
 | <img src="https://github.com/emirhangulmez/media/blob/main/SocialApp/Login.png?raw=true" width="250"/> | <img src="https://github.com/emirhangulmez/media/blob/main/SocialApp/Register.png" width="250"/> | <img src="https://github.com/emirhangulmez/media/blob/main/SocialApp/Home.png" width="250"/> |
-
 
 ## License
 
