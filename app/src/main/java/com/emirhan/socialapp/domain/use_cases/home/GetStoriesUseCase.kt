@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.use_cases.home
 
 import com.emirhan.socialapp.core.Resource
@@ -25,4 +24,4 @@ class GetStoriesUseCase @Inject constructor(
             emit(Resource.Error(message = e.message.toString()))
         }
     }
- }
+}

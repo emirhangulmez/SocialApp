@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.use_cases.login
 
 import com.emirhan.socialapp.core.Resource
@@ -17,8 +16,12 @@ class UserStateUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             when (val user = repository.currentUser()) {
-                null -> { emit(Resource.Success(null)) }
-                else -> { emit(Resource.Success(user)) }
+                null -> {
+                    emit(Resource.Success(null))
+                }
+                else -> {
+                    emit(Resource.Success(user))
+                }
             }
         } catch (e: FirebaseAuthException) {
             emit(Resource.Error(e.message.toString()))

@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun SocialApp() {
-        SocialAppTheme{
+        SocialAppTheme {
             // Initialize Status Bars
             StatusBar()
             // Initialize Whole App from NavGraph

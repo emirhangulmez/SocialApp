@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.data.repository
 
 import com.emirhan.socialapp.data.network.LoginDataSourceImpl
@@ -13,8 +12,8 @@ class LoginRepositoryImpl(
 
     override suspend fun login(
         email: String,
-        password: String)
-    : FirebaseUser? = dataSource.authentication(email, password)
+        password: String
+    ): FirebaseUser? = dataSource.authentication(email, password)
 
     override suspend fun register(
         username: String,

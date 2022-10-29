@@ -24,16 +24,16 @@ fun LoginContent(
     navigateToHomeScreen: () -> Unit,
     sheetState: ModalBottomSheetState,
     viewModel: LoginViewModel = hiltViewModel()
-    ) {
+) {
     val state = viewModel.loginState.value
     if (state.isLoading) {
         CircularProgressIndicator(Modifier.padding(10.dp))
     } else {
-     Card(
-        Modifier.padding(top = 20.dp),
-        shape = MaterialTheme.shapes.extraLarge,
-        elevation = 15.dp,
-        backgroundColor = MaterialTheme.colorScheme.background
+        Card(
+            Modifier.padding(top = 20.dp),
+            shape = MaterialTheme.shapes.extraLarge,
+            elevation = 15.dp,
+            backgroundColor = MaterialTheme.colorScheme.background
         ) {
             LoginCardContent(
                 padding = padding,
@@ -50,7 +50,7 @@ fun LoginTextField(
     placeholder: String,
     modifier: Modifier = Modifier,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
-    isError : Boolean = false,
+    isError: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardActions: KeyboardActions = KeyboardActions()

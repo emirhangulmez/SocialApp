@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.core
 
 class Constants {
@@ -14,11 +13,13 @@ class Constants {
         const val EMAIL_PLACEHOLDER = "E-Mail"
         const val USERNAME_PLACEHOLDER = "Username"
         const val PASSWORD_PLACEHOLDER = "Password"
+
         // Error Messages
         const val ERROR_EMAIL = "Please write correct email!"
         const val ERROR_USERNAME = "In username must be at not special characters and not too long!"
         const val ERROR_PASSWORD = "Password must be at least 6 digits!"
         const val ALREADY_LOGGED_IN = "You are already logged in!"
+
         // Username Regex
         const val USERNAME_REGEX = "^[A-Za-z][A-Za-z0-9_]{5,12}$"
         const val DESC_HIDE_PASSWORD = "Hide Password"
@@ -38,6 +39,7 @@ class Constants {
         const val USERS_COLLECTION = "users"
         const val COMMENTS_COLLECTION = "comments"
         const val POSTDATE_FIELD = "postDate"
+
         // Storage
         const val IMAGES_PATH = "images/"
         const val STORIES_PATH = "stories/"

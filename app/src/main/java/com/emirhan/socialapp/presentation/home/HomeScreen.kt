@@ -73,10 +73,10 @@ fun HomeScreen(
             isFloatingActionButtonDocked = true,
             floatingActionButton = {
                 FloatingActionButton(
-                     shape = CircleShape,
-                     containerColor = MaterialTheme.colorScheme.onBackground,
-                     onClick = { navigateToLoginScreen() },
-                 ) {
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.onBackground,
+                    onClick = { navigateToLoginScreen() },
+                ) {
                     Icon(
 
                         imageVector = Icons.Filled.Add,
@@ -90,7 +90,8 @@ fun HomeScreen(
         { paddingValues ->
             Box(
                 Modifier
-                    .fillMaxSize().padding(paddingValues),
+                    .fillMaxSize()
+                    .padding(paddingValues),
             ) {
                 LazyColumn(
                     Modifier
@@ -119,7 +120,7 @@ fun HomeScreen(
                                 listStory = it,
                                 status = status,
 
-                            )
+                                )
                         }
                     }
                     postsState.isLoading.let { isLoading ->
@@ -132,7 +133,8 @@ fun HomeScreen(
                                     CircularProgressIndicator(
                                         Modifier
                                             .size(100.dp)
-                                            .padding(20.dp))
+                                            .padding(20.dp)
+                                    )
                                 }
                             }
                         }
@@ -152,9 +154,9 @@ fun HomeScreen(
                                     )
                                 }
                             else
-                                // Internet is not available!
-                                // In that case is We showing in Shimmer Effect with Post Card.
-                                items(3){
+                            // Internet is not available!
+                            // In that case is We showing in Shimmer Effect with Post Card.
+                                items(3) {
                                     HomePostCardSection(
                                         sheetState = sheetState,
                                         status = status
@@ -173,14 +175,15 @@ fun HomeScreen(
 fun requestPermission(
     homeViewModel: HomeViewModel = hiltViewModel(),
     loginViewModel: LoginViewModel = hiltViewModel()
-) : ManagedActivityResultLauncher<String, Uri?> {
+): ManagedActivityResultLauncher<String, Uri?> {
 
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val context = LocalContext.current
     val bitmap = remember { mutableStateOf<Bitmap?>(null) }
 
     val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()) { uri ->
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
         imageUri = uri
     }
 

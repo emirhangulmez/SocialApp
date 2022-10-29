@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.utils
 
 import android.content.Context
@@ -15,9 +14,10 @@ import kotlinx.coroutines.launch
 
 class NetworkConnectivityObserver(
     context: Context
-): ConnectivityObserver {
+) : ConnectivityObserver {
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun observe(): Flow<ConnectivityObserver.Status> {
         return callbackFlow {

@@ -1,4 +1,5 @@
 @file:OptIn(ExperimentalMaterialApi::class)
+
 package com.emirhan.socialapp.presentation.login.components
 
 import androidx.compose.foundation.layout.*
@@ -95,7 +96,7 @@ fun ProfileCardUI(
 fun LoginCardUI(
     viewModel: LoginViewModel = hiltViewModel(),
     registerSheetState: ModalBottomSheetState,
-    ) {
+) {
     /*
     * Initialize Variables
     * Password Visibility, Sheet Hide/Show, ViewModel Communication
@@ -103,7 +104,7 @@ fun LoginCardUI(
     val emailText = viewModel.emailText
     val passwordText = viewModel.passwordText
 
-    val passwordFocusRequester = remember {FocusRequester()}
+    val passwordFocusRequester = remember { FocusRequester() }
 
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val scope = rememberCoroutineScope()

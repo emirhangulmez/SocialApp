@@ -85,7 +85,7 @@ class HomeViewModel @Inject constructor(
 
     fun createStory(story: Story) {
         viewModelScope.launch {
-            createStoryUseCase(story).collect {  result ->
+            createStoryUseCase(story).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         _storyState.value = StoryState(story = result.data)

@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.model
 
 import com.google.firebase.Timestamp

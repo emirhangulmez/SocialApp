@@ -52,8 +52,8 @@ fun RegisterContent(
 
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
-    val usernameFocusRequester = remember {FocusRequester()}
-    val passwordFocusRequester = remember {FocusRequester()}
+    val usernameFocusRequester = remember { FocusRequester() }
+    val passwordFocusRequester = remember { FocusRequester() }
 
     // Login automatically if user registered
     // Control error on state changed
@@ -62,7 +62,7 @@ fun RegisterContent(
             sheetState.hide()
             loginViewModel.controlUser()
         }
-        if (state.error.isNotBlank()){
+        if (state.error.isNotBlank()) {
             state.error.let {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
@@ -82,19 +82,14 @@ fun RegisterContent(
         /*
         * E-Mail Text Field
         */
-        LoginTextField(
-            text = emailText,
+        LoginTextField(text = emailText,
             onValueChanged = viewModel::onEmailChanged,
             isError = !viewModel.isEmailValid(),
             placeholder = EMAIL_PLACEHOLDER,
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
             ),
-            keyboardActions = KeyboardActions(
-                onNext = { usernameFocusRequester.requestFocus() }
-            )
-        )
+            keyboardActions = KeyboardActions(onNext = { usernameFocusRequester.requestFocus() }))
 
         if (!viewModel.isEmailValid()) {
             Text(
@@ -108,20 +103,15 @@ fun RegisterContent(
         /*
         * Username Text Field
         */
-        LoginTextField(
-            text = usernameText,
+        LoginTextField(text = usernameText,
             onValueChanged = viewModel::onUsernameChanged,
             placeholder = USERNAME_PLACEHOLDER,
             isError = !viewModel.isUsernameValid(),
             modifier = Modifier.focusRequester(usernameFocusRequester),
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
             ),
-            keyboardActions = KeyboardActions(
-                onNext = { passwordFocusRequester.requestFocus() }
-            )
-        )
+            keyboardActions = KeyboardActions(onNext = { passwordFocusRequester.requestFocus() }))
 
         if (!viewModel.isUsernameValid()) {
             Text(
@@ -136,30 +126,24 @@ fun RegisterContent(
         /*
         * Password Text Field
         */
-        LoginTextField(
-            text = passwordText,
+        LoginTextField(text = passwordText,
             onValueChanged = viewModel::onPasswordChanged,
             placeholder = PASSWORD_PLACEHOLDER,
             isError = !viewModel.isPasswordValid(),
             modifier = Modifier.focusRequester(passwordFocusRequester),
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                val image = if (passwordVisible)
-                    Icons.Filled.Visibility else Icons.Filled.VisibilityOff
-                val description =
-                    if (passwordVisible) DESC_HIDE_PASSWORD else DESC_SHOW_PASSWORD
+                val image =
+                    if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                val description = if (passwordVisible) DESC_HIDE_PASSWORD else DESC_SHOW_PASSWORD
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(imageVector = image, description)
                 }
             },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
+                keyboardType = KeyboardType.Password, imeAction = ImeAction.Done
             ),
-            keyboardActions = KeyboardActions(
-                onDone = { if (viewModel.checkValidation()) viewModel.registerUser() }
-            )
-        )
+            keyboardActions = KeyboardActions(onDone = { if (viewModel.checkValidation()) viewModel.registerUser() }))
 
         if (!viewModel.isPasswordValid()) {
             Text(

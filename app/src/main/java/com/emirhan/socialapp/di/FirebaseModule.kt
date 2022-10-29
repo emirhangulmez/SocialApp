@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.di
 
 import com.google.firebase.auth.FirebaseAuth
@@ -21,7 +20,6 @@ class FirebaseModule {
     @Provides
     @Singleton
     fun provideFirebaseAuth() = FirebaseAuth.getInstance()
-
 
     @Provides
     @Singleton

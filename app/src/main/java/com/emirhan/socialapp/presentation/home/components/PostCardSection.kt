@@ -40,7 +40,7 @@ fun HomePostCardSection(
             Modifier
                 .fillMaxWidth()
                 .padding(30.dp)
-       },
+        },
         shape = MaterialTheme.shapes.large,
         elevation = CardDefaults.cardElevation(25.dp)
     ) {
@@ -73,9 +73,3 @@ fun HomePostCardSection(
         )
     }
 }
-
-//..
-
-
-
-

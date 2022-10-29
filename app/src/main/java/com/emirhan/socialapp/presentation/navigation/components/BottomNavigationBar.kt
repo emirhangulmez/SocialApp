@@ -21,45 +21,57 @@ fun BottomNavigationBar(navController: NavController, currentRoute: String) {
         Screen.HomeScreen,
         Screen.LoginScreen
     )
-    BottomAppBar(modifier = Modifier
-        .graphicsLayer {
-            shape = RoundedCornerShape(
-                topStart = 20.dp,
-                topEnd = 20.dp
-            )
-            clip = true
-        },
+    BottomAppBar(
+        modifier = Modifier
+            .graphicsLayer {
+                shape = RoundedCornerShape(
+                    topStart = 20.dp,
+                    topEnd = 20.dp
+                )
+                clip = true
+            },
         backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
         elevation = 15.dp,
         cutoutShape = CircleShape
-)  {
+    ) {
         items.forEach { item ->
             if (item.route != Screen.LoginScreen.route)
-            BottomNavigationItem(
-                icon = { Icon(painter = painterResource(id = item.icon), contentDescription = item.title) },
-                selectedContentColor = MaterialTheme.colorScheme.onBackground,
-                unselectedContentColor = MaterialTheme.colorScheme.onBackground.copy(0.4f),
-                alwaysShowLabel = false,
-                label = {
-                    if (currentRoute != Screen.LoginScreen.route)
-                       Text(text = currentRoute)
-                },
-                selected = currentRoute == item.route,
-                onClick = {
-                    if (currentRoute != item.route)
-                    navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
+                BottomNavigationItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = item.icon),
+                            contentDescription = item.title
+                        )
+                    },
+                    selectedContentColor = MaterialTheme.colorScheme.onBackground,
+                    unselectedContentColor = MaterialTheme.colorScheme.onBackground.copy(0.4f),
+                    alwaysShowLabel = false,
+                    label = {
+                        if (currentRoute != Screen.LoginScreen.route)
+                            Text(text = currentRoute)
+                    },
+                    selected = currentRoute == item.route,
+                    onClick = {
+                        if (currentRoute != item.route) {
+                            navController.navigate(item.route) {
+                                navController.graph.startDestinationRoute?.let { route ->
+                                    popUpTo(route) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
-                    }
-                })
+                    })
             else
                 BottomNavigationItem(
-                    icon = { Icon(painter = painterResource(id = item.icon), contentDescription = item.title) },
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = item.icon),
+                            contentDescription = item.title
+                        )
+                    },
                     selectedContentColor = MaterialTheme.colorScheme.onBackground,
                     unselectedContentColor = MaterialTheme.colorScheme.onBackground.copy(0.4f),
                     alwaysShowLabel = false,
@@ -71,12 +83,12 @@ fun BottomNavigationBar(navController: NavController, currentRoute: String) {
                                     popUpTo(route) {
                                         saveState = true
                                     }
-                                launchSingleTop = true
-                                restoreState = true
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
-                        }
                     }
                 )
-            }
         }
     }
+}

@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(
     // Get info on user, users
     private val getUsersUseCase: GetUsersUseCase,
     private val getUserUseCase: GetUserUseCase
-    ) : ViewModel() {
+) : ViewModel() {
 
     /*
     *  Text Fields Recompose Strings for Login
@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
 
     // Get User Detail Data with Mutable State List
     private var _usersState = mutableStateListOf<User?>()
-    val usersState : SnapshotStateList<User?> = _usersState
+    val usersState: SnapshotStateList<User?> = _usersState
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
@@ -63,10 +63,25 @@ class LoginViewModel @Inject constructor(
 
 
     // Placeholder Validation Check
-    fun isEmailValid() : Boolean { return if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {Patterns.EMAIL_ADDRESS.matcher(emailText).matches()} else {true} }
-    fun isPasswordValid() : Boolean { return if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {passwordText.length > 5} else {true} }
+    fun isEmailValid(): Boolean {
+        return if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {
+            Patterns.EMAIL_ADDRESS.matcher(emailText).matches()
+        } else {
+            true
+        }
+    }
+
+    fun isPasswordValid(): Boolean {
+        return if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {
+            passwordText.length > 5
+        } else {
+            true
+        }
+    }
+
     // This function is validation check result
-    fun checkValidation() : Boolean = Patterns.EMAIL_ADDRESS.matcher(emailText).matches() && passwordText.length > 5
+    fun checkValidation(): Boolean =
+        Patterns.EMAIL_ADDRESS.matcher(emailText).matches() && passwordText.length > 5
 
     // Clearing User Filled Form for the security reasons.
     private fun clearActions() {
@@ -75,8 +90,13 @@ class LoginViewModel @Inject constructor(
     }
 
     // onValueChanged Changed Listeners
-    fun onEmailChanged(value: String) { emailText = value }
-    fun onPasswordChanged(value: String) { passwordText = value }
+    fun onEmailChanged(value: String) {
+        emailText = value
+    }
+
+    fun onPasswordChanged(value: String) {
+        passwordText = value
+    }
 
     init {
         checkConnectivity()
@@ -104,7 +124,7 @@ class LoginViewModel @Inject constructor(
     // Check user last state for UI
     fun controlUser() = viewModelScope.launch {
         loginStateUseCase().collect { result ->
-            when (result){
+            when (result) {
                 is Resource.Success -> {
                     _loginState.value = LoginState(user = result.data)
                 }
@@ -123,12 +143,12 @@ class LoginViewModel @Inject constructor(
     fun signOut() = viewModelScope.launch {
         signOutUseCase().collect { result ->
             when (result) {
-                 is Resource.Success -> {
-                     _loginState.value = LoginState(user = null)
-                 }
-                 is Resource.Error -> {
-                     _loginState.value = LoginState(error = result.message.toString())
-                 }
+                is Resource.Success -> {
+                    _loginState.value = LoginState(user = null)
+                }
+                is Resource.Error -> {
+                    _loginState.value = LoginState(error = result.message.toString())
+                }
                 is Resource.Loading -> {
                     _loginState.value = LoginState(isLoading = true)
                 }
@@ -165,7 +185,7 @@ class LoginViewModel @Inject constructor(
                     _userState.value = UserState(error = result.data.toString())
                 }
                 is Resource.Loading -> {
-                  _userState.value = UserState(isLoading = true)
+                    _userState.value = UserState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)

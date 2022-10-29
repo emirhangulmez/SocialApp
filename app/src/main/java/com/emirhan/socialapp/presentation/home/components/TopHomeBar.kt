@@ -18,12 +18,18 @@ import com.emirhan.socialapp.presentation.utils.BlankAvatar
 fun TopHomeBar(
     username: String?,
     navigateToLoginScreen: () -> Unit
-)
-{
-    Box(Modifier.fillMaxWidth().padding(20.dp)) {
+) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .padding(20.dp)) {
         // Notification Icon
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            IconButton(onClick = { if (username == null) { navigateToLoginScreen() } }) {
+            IconButton(onClick = {
+                if (username == null) {
+                    navigateToLoginScreen()
+                }
+            }) {
                 Icon(
                     imageVector = Icons.Filled.Notifications,
                     tint = MaterialTheme.colorScheme.onBackground,
@@ -40,7 +46,7 @@ fun TopHomeBar(
         Row(Modifier.fillMaxWidth()) {
             BlankAvatar()
             Spacer(Modifier.width(10.dp))
-                Column(Modifier.fillMaxWidth()) {
+            Column(Modifier.fillMaxWidth()) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Row(Modifier.fillMaxWidth()) {
 
@@ -63,14 +69,13 @@ fun TopHomeBar(
                     }
                 }
                 if (username == null) {
-                        Text(
-                            text = "Please login or register!",
-                            modifier = Modifier.clickable { navigateToLoginScreen()  },
-                            style = MaterialTheme.typography.bodySmall,
-                        )
-                    }
+                    Text(
+                        text = "Please login or register!",
+                        modifier = Modifier.clickable { navigateToLoginScreen() },
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
             }
-
         }
     }
 }

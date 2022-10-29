@@ -35,9 +35,12 @@ fun LoginScreen(
     navController: NavController,
     navigateToHomeScreen: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel(),
-    ) {
+) {
 
-    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden, skipHalfExpanded = true)
+    val sheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = true
+    )
 
     val loginState = viewModel.loginState.value
 
@@ -46,13 +49,13 @@ fun LoginScreen(
     val userState = viewModel.userState
 
     LaunchedEffect(loginState, userState) {
-            loginState.error?.let {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            }
+        loginState.error?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
 
-            loginState.user?.let { user ->
-                viewModel.getUser(user.uid)
-            }
+        loginState.user?.let { user ->
+            viewModel.getUser(user.uid)
+        }
     }
 
     ModalBottomSheetLayout(
@@ -64,8 +67,8 @@ fun LoginScreen(
             if (viewModel.loginState.value.user == null)
                 RegisterContent(sheetState = sheetState)
             else
-              BlankRegisterContent()
-           },
+                BlankRegisterContent()
+        },
         sheetBackgroundColor = MaterialTheme.colorScheme.background,
     ) {
         Scaffold(
@@ -134,15 +137,15 @@ fun LoginScreen(
                         contentDescription = "Person"
                     )
                 }
-                        LoginContent(
-                            padding = padding,
-                            navigateToHomeScreen = navigateToHomeScreen,
-                            sheetState = sheetState,
-                            viewModel = viewModel
-                        )
-                    }
+                LoginContent(
+                    padding = padding,
+                    navigateToHomeScreen = navigateToHomeScreen,
+                    sheetState = sheetState,
+                    viewModel = viewModel
+                )
             }
         }
     }
+}
 
 

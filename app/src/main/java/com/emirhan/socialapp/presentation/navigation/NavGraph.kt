@@ -18,16 +18,16 @@ fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = if (userState?.user != null) HomeScreen.route else LoginScreen.route
-     ) {
+    ) {
         composable(
             route = LoginScreen.route
         ) {
-                LoginScreen(
-                    navigateToHomeScreen = {
-                        navController.navigate(HomeScreen.route)
-                    },
-                    navController = navController
-                )
+            LoginScreen(
+                navigateToHomeScreen = {
+                    navController.navigate(HomeScreen.route)
+                },
+                navController = navController
+            )
         }
         composable(
             route = HomeScreen.route
@@ -39,6 +39,5 @@ fun NavGraph(
                 navController = navController,
             )
         }
-
     }
 }

@@ -41,7 +41,7 @@ import com.valentinilk.shimmer.shimmer
 fun HomeStoryCardSection(
     viewModel: LoginViewModel = hiltViewModel(),
     listStory: List<Story> = listOf(),
-    status : ConnectivityObserver.Status? = null
+    status: ConnectivityObserver.Status? = null
 ) {
     LaunchedEffect(viewModel.loginState) {
         viewModel.controlUser()
@@ -92,7 +92,7 @@ fun HomeStoryCardSection(
                     story = story,
                     user = usersState.firstOrNull { it?.uid == story.userUID }
                 )
-                }
+            }
         } else {
             items(2) {
                 StoryCards()
@@ -112,7 +112,7 @@ fun StoryCards(
 
     val gradient = Brush.verticalGradient(
         colors = listOf(Color.Transparent, Color.Black),
-        startY = sizeImage.height.toFloat()/3,  // 1/3
+        startY = sizeImage.height.toFloat() / 3,  // 1/3
         endY = sizeImage.height.toFloat()
     )
 
@@ -137,9 +137,11 @@ fun StoryCards(
                     .onGloballyPositioned {
                         sizeImage = it.size
                     })
-            Box(modifier = Modifier
-                .matchParentSize()
-                .background(gradient))
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .background(gradient)
+            )
             // User Avatar
             user.let {
                 if (it != null && it.avatarURL != "")

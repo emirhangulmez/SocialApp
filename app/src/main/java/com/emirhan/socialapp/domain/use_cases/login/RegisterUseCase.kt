@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.use_cases.login
 
 import com.emirhan.socialapp.core.Resource
@@ -14,7 +13,11 @@ import javax.inject.Inject
 class RegisterUseCase @Inject constructor(
     private val repository: LoginRepository
 ) {
-    operator fun invoke(username: String, email: String, password: String): Flow<Resource<FirebaseUser?>> = flow {
+    operator fun invoke(
+        username: String,
+        email: String,
+        password: String
+    ): Flow<Resource<FirebaseUser?>> = flow {
         try {
             emit(Resource.Loading())
             val user = repository.register(username, email, password)

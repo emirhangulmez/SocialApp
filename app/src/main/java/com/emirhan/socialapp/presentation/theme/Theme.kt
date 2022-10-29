@@ -73,8 +73,7 @@ private val DarkColorPalette = darkColorScheme(
 fun SocialAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    isDynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    isDynamicColor: Boolean = true, content: @Composable () -> Unit
 ) {
     val dynamicColor = isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colorScheme = when {
@@ -89,9 +88,6 @@ fun SocialAppTheme(
     }
 
     MaterialTheme(
-        typography = Typography,
-        colorScheme = colorScheme,
-        shapes = Shapes,
-        content = content
+        typography = Typography, colorScheme = colorScheme, shapes = Shapes, content = content
     )
 }

@@ -26,7 +26,7 @@ fun CommentsContent(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
         Box(
             Modifier.fillMaxWidth()
         ) {
@@ -47,8 +47,8 @@ fun CommentsContent(
 
             Row(
                 Modifier
-                .fillMaxWidth()
-                .padding(20.dp)
+                    .fillMaxWidth()
+                    .padding(20.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Person,
@@ -71,8 +71,7 @@ fun CommentsContent(
                     onValueChange = { homeViewModel.commentValue(it) },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 10.dp)
-                    ,
+                        .padding(start = 10.dp),
                     placeholder = {
                         Text(text = "Enter Comment")
                     }

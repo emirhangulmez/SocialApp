@@ -25,7 +25,7 @@ import java.util.*
 
 @Composable
 fun BlankAvatar(
-    avatarSize : Dp = 54.dp
+    avatarSize: Dp = 54.dp
 ) {
     Icon(
         imageVector = Icons.Filled.Person,
@@ -49,9 +49,11 @@ fun dateLabel(timestamp: Date, today: Date): String {
     return if (today.time - timestamp.time < 2 * DateUtils.MINUTE_IN_MILLIS) {
         "Just Now"
     } else {
-        DateUtils.getRelativeTimeSpanString(timestamp.time,
+        DateUtils.getRelativeTimeSpanString(
+            timestamp.time,
             today.time,
             0,
-            DateUtils.FORMAT_ABBREV_MONTH).toString()
+            DateUtils.FORMAT_ABBREV_MONTH
+        ).toString()
     }
 }

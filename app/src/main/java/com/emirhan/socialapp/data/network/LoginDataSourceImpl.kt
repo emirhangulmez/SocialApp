@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.data.network
 
 import com.emirhan.socialapp.core.Constants.Companion.USERS_COLLECTION
@@ -23,18 +22,22 @@ import kotlinx.coroutines.tasks.await
 class LoginDataSourceImpl(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
-): LoginDataSource {
+) : LoginDataSource {
 
     // Login user on Firebase Authentication
     override suspend fun authentication(email: String, password: String): FirebaseUser? =
-         auth
+        auth
             .signInWithEmailAndPassword(email, password)
             .await()
             .user
 
     // Create user on Firebase Authentication
-    override suspend fun createUser(username: String, email: String, password: String): FirebaseUser? =
-         auth
+    override suspend fun createUser(
+        username: String,
+        email: String,
+        password: String
+    ): FirebaseUser? =
+        auth
             .createUserWithEmailAndPassword(email, password)
             .await()
             .user.apply {

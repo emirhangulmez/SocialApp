@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.use_cases.login
 
 import com.emirhan.socialapp.core.Resource
@@ -11,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetUserUseCase @Inject constructor(
-    private val repository : LoginRepository
+    private val repository: LoginRepository
 ) {
     operator fun invoke(uid: String?): Flow<Resource<User?>> = flow {
         try {

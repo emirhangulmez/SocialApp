@@ -119,7 +119,10 @@ fun PostCardBottomRow(
             .padding(horizontal = 20.dp, vertical = 5.dp)
     ) {
         IconButton(
-            onClick = { if (status == ConnectivityObserver.Status.Available) favoriteVisibility = !favoriteVisibility },
+            onClick = {
+                if (status == ConnectivityObserver.Status.Available) favoriteVisibility =
+                    !favoriteVisibility
+            },
             modifier = Modifier.size(30.dp)
         ) {
             val targetColor by animateColorAsState(

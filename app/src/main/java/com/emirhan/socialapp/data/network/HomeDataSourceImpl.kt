@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.data.network
 
 import android.graphics.Bitmap
@@ -37,7 +36,7 @@ class HomeDataSourceImpl(
     override suspend fun getPosts(): Flow<MutableList<Post>> =
         fireStore.collection(POSTS_COLLECTION).orderBy(POSTDATE_FIELD, Query.Direction.DESCENDING)
             .snapshotFlow()
-            .map { querySnapshot -> querySnapshot.toObjects(Post::class.java)  }
+            .map { querySnapshot -> querySnapshot.toObjects(Post::class.java) }
 
     override suspend fun getPost(postId: String): Post? =
         fireStore.collection(POSTS_COLLECTION)
@@ -66,7 +65,7 @@ class HomeDataSourceImpl(
             .await()
             .toObject(Story::class.java)
 
-    override suspend fun createStory(story: Story): Story?  {
+    override suspend fun createStory(story: Story): Story? {
         // Get storage link and initialize story picture url variable.
         if (story.pictureBitmap != null) {
             story.pictureURL = getImageLink(story.pictureBitmap).toString()
@@ -120,20 +119,20 @@ class HomeDataSourceImpl(
         }
     }
 
-    private suspend fun getImageLink(pictureBitmap: Bitmap) : Uri =
+    private suspend fun getImageLink(pictureBitmap: Bitmap): Uri =
         // Save picture on storage
-            toByteArray(pictureBitmap).let { byteArray ->
-                storage.reference.child(IMAGES_PATH)
-                    .child(STORIES_PATH)
-                    .child(UUID.randomUUID().toString())
-                    .putBytes(byteArray)
-                    .await()
-                    .storage
-                    .downloadUrl
-                    .await()
-            }
+        toByteArray(pictureBitmap).let { byteArray ->
+            storage.reference.child(IMAGES_PATH)
+                .child(STORIES_PATH)
+                .child(UUID.randomUUID().toString())
+                .putBytes(byteArray)
+                .await()
+                .storage
+                .downloadUrl
+                .await()
+        }
 
-    private fun toByteArray(pictureBitmap: Bitmap) : ByteArray =
+    private fun toByteArray(pictureBitmap: Bitmap): ByteArray =
         ByteArrayOutputStream().let {
             pictureBitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
             return it.toByteArray()

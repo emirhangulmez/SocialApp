@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.use_cases.home
 
 import com.emirhan.socialapp.core.Resource

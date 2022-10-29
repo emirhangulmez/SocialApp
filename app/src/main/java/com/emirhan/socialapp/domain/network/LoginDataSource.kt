@@ -1,4 +1,3 @@
-
 package com.emirhan.socialapp.domain.network
 
 import com.emirhan.socialapp.domain.model.User
