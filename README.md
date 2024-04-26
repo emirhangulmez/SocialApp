@@ -1,6 +1,6 @@
 # SocialApp
 ![Jetpack Compose](https://cdn.fs.teachablecdn.com/66M5Z3DbSYSEXIe2m0ZF)
-- An social media app made by Jetpack Compose
+- An social media app made with Jetpack Compose
 
 
 [![Apache License](https://img.shields.io/badge/License-Apache-blue.svg)](https://github.com/emirhangulmez/SocialApp#license)
