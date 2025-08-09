@@ -1,5 +1,5 @@
 # SocialApp
-![Jetpack Compose](https://cdn.fs.teachablecdn.com/66M5Z3DbSYSEXIe2m0ZF)
+![Jetpack Compose](https://raw.githubusercontent.com/emirhangulmez/media/refs/heads/main/SocialApp/jetpack_compose.png)
 - An social media app made with Jetpack Compose
 
 
