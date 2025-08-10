@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emirhan.socialapp.core.Constants.Companion.USERNAME_REGEX
 import com.emirhan.socialapp.core.Resource
-import com.emirhan.socialapp.domain.use_cases.login.RegisterUseCase
+import com.emirhan.socialapp.domain.use_case.login.RegisterUseCase
 import com.emirhan.socialapp.presentation.register.model.RegisterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

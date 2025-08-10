@@ -1,4 +1,4 @@
-package com.emirhan.socialapp.domain.use_cases.home
+package com.emirhan.socialapp.domain.use_case.home
 
 import com.emirhan.socialapp.core.Resource
 import com.emirhan.socialapp.domain.model.Story
@@ -9,14 +9,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class CreateStoryUseCase @Inject constructor(
+class GetStoriesUseCase @Inject constructor(
     private val repository: HomeRepository
 ) {
-    operator fun invoke(story: Story): Flow<Resource<Story?>> = flow {
+    operator fun invoke(): Flow<Resource<List<Story>>> = flow {
         try {
             emit(Resource.Loading())
-            repository.createStory(story).apply {
-                emit(Resource.Success(this))
+            repository.getStories().collect {
+                emit(Resource.Success(it))
             }
         } catch (e: FirebaseFirestoreException) {
             emit(Resource.Error(message = e.message.toString()))

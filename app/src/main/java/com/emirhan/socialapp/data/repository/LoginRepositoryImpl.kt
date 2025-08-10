@@ -1,13 +1,14 @@
 package com.emirhan.socialapp.data.repository
 
-import com.emirhan.socialapp.data.network.LoginDataSourceImpl
 import com.emirhan.socialapp.domain.model.User
+import com.emirhan.socialapp.domain.network.LoginDataSource
 import com.emirhan.socialapp.domain.repository.LoginRepository
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class LoginRepositoryImpl(
-    private val dataSource: LoginDataSourceImpl
+class LoginRepositoryImpl @Inject constructor(
+    private val dataSource: LoginDataSource
 ) : LoginRepository {
 
     override suspend fun login(
@@ -32,4 +33,6 @@ class LoginRepositoryImpl(
     override fun currentUser(): FirebaseUser? = dataSource.currentUser()
 
     override fun signOut() = dataSource.signOut()
+
+    override suspend fun authenticateWithPasskey() = dataSource.authenticateWithPasskey()
 }

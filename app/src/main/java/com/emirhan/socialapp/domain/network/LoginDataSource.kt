@@ -1,5 +1,6 @@
 package com.emirhan.socialapp.domain.network
 
+import androidx.credentials.Credential
 import com.emirhan.socialapp.domain.model.User
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
@@ -17,4 +18,6 @@ interface LoginDataSource {
     fun currentUser(): FirebaseUser?
 
     fun signOut()
+
+    suspend fun authenticateWithPasskey(): Credential?
 }

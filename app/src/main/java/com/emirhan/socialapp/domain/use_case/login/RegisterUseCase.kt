@@ -1,4 +1,4 @@
-package com.emirhan.socialapp.domain.use_cases.login
+package com.emirhan.socialapp.domain.use_case.login
 
 import com.emirhan.socialapp.core.Resource
 import com.emirhan.socialapp.domain.repository.LoginRepository

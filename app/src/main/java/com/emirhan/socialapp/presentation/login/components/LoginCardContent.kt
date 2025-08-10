@@ -2,19 +2,45 @@
 
 package com.emirhan.socialapp.presentation.login.components
 
-import androidx.compose.foundation.layout.*
+// Constants
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.ModalBottomSheetState
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.runtime.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -22,24 +48,18 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.emirhan.socialapp.core.Constants
-import com.emirhan.socialapp.presentation.login.LoginViewModel
-import kotlinx.coroutines.launch
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-// Constants
-import com.emirhan.socialapp.core.Constants.Companion.EMAIL_PLACEHOLDER
-import com.emirhan.socialapp.core.Constants.Companion.FORGOT_PASSWORD_BUTTON
-import com.emirhan.socialapp.core.Constants.Companion.SIGN_UP_BUTTON
 import com.emirhan.socialapp.core.Constants.Companion.DESC_HIDE_PASSWORD
 import com.emirhan.socialapp.core.Constants.Companion.DESC_SHOW_PASSWORD
+import com.emirhan.socialapp.core.Constants.Companion.EMAIL_PLACEHOLDER
 import com.emirhan.socialapp.core.Constants.Companion.ERROR_EMAIL
 import com.emirhan.socialapp.core.Constants.Companion.ERROR_PASSWORD
+import com.emirhan.socialapp.core.Constants.Companion.FORGOT_PASSWORD_BUTTON
+import com.emirhan.socialapp.core.Constants.Companion.LOGIN_WITH_PASSKEY_BUTTON
 import com.emirhan.socialapp.core.Constants.Companion.LOG_OUT_BUTTON
+import com.emirhan.socialapp.core.Constants.Companion.SIGN_UP_BUTTON
+import com.emirhan.socialapp.core.Extensions.checkCompatibleWithCredentialManager
+import com.emirhan.socialapp.presentation.login.LoginViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -178,10 +198,10 @@ fun LoginCardUI(
     /*
     * Login Button Row
     */
-    Row(
+    Column(
         Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
             modifier = Modifier.widthIn(min = 250.dp),
@@ -192,6 +212,23 @@ fun LoginCardUI(
             Text(
                 text = Constants.LOGIN_BUTTON,
             )
+        }
+        if (LocalContext.current.checkCompatibleWithCredentialManager()) {
+            Button(
+                modifier = Modifier.widthIn(min = 250.dp),
+                onClick = viewModel::loginWithPasskey,
+                shape = MaterialTheme.shapes.small,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ManageAccounts,
+                    contentDescription = null, // Decorative icon, no need for description
+                    modifier = Modifier.padding(end = 8.dp),
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+                Text(
+                    text = LOGIN_WITH_PASSKEY_BUTTON,
+                )
+            }
         }
     }
 

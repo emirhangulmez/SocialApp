@@ -1,5 +1,10 @@
 package com.emirhan.socialapp.data.network
 
+import androidx.credentials.Credential
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetPasswordOption
+import com.emirhan.socialapp.SocialApp.Companion.currentActivityContext
 import com.emirhan.socialapp.core.Constants.Companion.USERS_COLLECTION
 import com.emirhan.socialapp.domain.model.User
 import com.emirhan.socialapp.domain.network.LoginDataSource
@@ -13,13 +18,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  * In the same way register w/ credentials and retrieves user information
  */
-
-class LoginDataSourceImpl(
+class LoginDataSourceImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
 ) : LoginDataSource {
@@ -96,4 +101,12 @@ class LoginDataSourceImpl(
             listenerRegistration.remove()
         }
     }
+
+    override suspend fun authenticateWithPasskey(): Credential =
+        currentActivityContext?.let { activityContext ->
+            CredentialManager.create(activityContext).getCredential(
+                context = activityContext,
+                GetCredentialRequest(credentialOptions = listOf(GetPasswordOption()))
+            ).credential
+        } ?: throw IllegalStateException("Current activity is null")
 }

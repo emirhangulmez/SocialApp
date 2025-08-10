@@ -2,23 +2,32 @@ package com.emirhan.socialapp.presentation.login
 
 
 import android.util.Patterns
-import androidx.compose.runtime.*
-import androidx.lifecycle.*
-import com.emirhan.socialapp.core.Resource
-import com.emirhan.socialapp.presentation.login.model.LoginState
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.credentials.PasswordCredential
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.emirhan.socialapp.core.Resource
 import com.emirhan.socialapp.domain.model.User
 import com.emirhan.socialapp.domain.network.ConnectivityObserver
-import com.emirhan.socialapp.domain.use_cases.login.*
+import com.emirhan.socialapp.domain.use_case.login.GetUserUseCase
+import com.emirhan.socialapp.domain.use_case.login.GetUsersUseCase
+import com.emirhan.socialapp.domain.use_case.login.LoginUseCase
+import com.emirhan.socialapp.domain.use_case.login.LoginWithPasskeyUseCase
+import com.emirhan.socialapp.domain.use_case.login.SignOutUseCase
+import com.emirhan.socialapp.domain.use_case.login.UserStateUseCase
+import com.emirhan.socialapp.presentation.login.model.LoginState
 import com.emirhan.socialapp.presentation.login.model.UserState
-
-
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +40,9 @@ class LoginViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase,
     // Get info on user, users
     private val getUsersUseCase: GetUsersUseCase,
-    private val getUserUseCase: GetUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    // Login with Passkey
+    private val loginWithPasskeyUseCase: LoginWithPasskeyUseCase
 ) : ViewModel() {
 
     /*
@@ -102,6 +113,26 @@ class LoginViewModel @Inject constructor(
         checkConnectivity()
     }
 
+    fun loginWithPasskey() = viewModelScope.launch {
+        loginWithPasskeyUseCase().collect { result ->
+            when (result) {
+                is Resource.Success -> {
+                    if (result.data is PasswordCredential) {
+                        println( "PASSKEY -> ${(result.data).password} ${(result.data).id}")
+                    }
+                }
+
+                is Resource.Error -> {
+                    _loginState.value = LoginState(error = result.message.toString())
+                }
+
+                is Resource.Loading -> {
+                    _loginState.value = LoginState(isLoading = true)
+                }
+            }
+        }
+    }
+
     // Login use case control to the login state
     fun loginUser() = viewModelScope.launch {
         loginUseCase(emailText, passwordText).collect { result ->
@@ -111,9 +142,11 @@ class LoginViewModel @Inject constructor(
                         clearActions()
                     }
                 }
+
                 is Resource.Error -> {
                     _loginState.value = LoginState(error = result.message.toString())
                 }
+
                 is Resource.Loading -> {
                     _loginState.value = LoginState(isLoading = true)
                 }
@@ -128,9 +161,11 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     _loginState.value = LoginState(user = result.data)
                 }
+
                 is Resource.Error -> {
                     _loginState.value = LoginState(error = result.message.toString())
                 }
+
                 is Resource.Loading -> {
                     // Is loading for Splash Screen
                     _isLoading.value = false
@@ -146,9 +181,11 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     _loginState.value = LoginState(user = null)
                 }
+
                 is Resource.Error -> {
                     _loginState.value = LoginState(error = result.message.toString())
                 }
+
                 is Resource.Loading -> {
                     _loginState.value = LoginState(isLoading = true)
                 }
@@ -166,9 +203,11 @@ class LoginViewModel @Inject constructor(
                         }
                     }
                 }
+
                 is Resource.Error -> {
                     _userState.value = UserState(error = result.message.toString())
                 }
+
                 is Resource.Loading -> {
                     _userState.value = UserState(isLoading = true)
                 }
@@ -181,9 +220,11 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     _userState.value = UserState(user = result.data)
                 }
+
                 is Resource.Error -> {
                     _userState.value = UserState(error = result.data.toString())
                 }
+
                 is Resource.Loading -> {
                     _userState.value = UserState(isLoading = true)
                 }

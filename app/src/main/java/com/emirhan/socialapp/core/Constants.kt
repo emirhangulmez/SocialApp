@@ -27,6 +27,7 @@ class Constants {
 
         // Buttons
         const val LOGIN_BUTTON = "Log In"
+        const val LOGIN_WITH_PASSKEY_BUTTON = "Log In with Passkey"
         const val REGISTER_BUTTON = "Register"
         const val SIGN_UP_BUTTON = "Sign Up"
         const val FORGOT_PASSWORD_BUTTON = "Forgot Password?"

@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emirhan.socialapp.core.Resource
 import com.emirhan.socialapp.domain.model.Story
-import com.emirhan.socialapp.domain.use_cases.home.CreateStoryUseCase
-import com.emirhan.socialapp.domain.use_cases.home.GetPostsUseCase
-import com.emirhan.socialapp.domain.use_cases.home.GetStoriesUseCase
+import com.emirhan.socialapp.domain.use_case.home.CreateStoryUseCase
+import com.emirhan.socialapp.domain.use_case.home.GetPostsUseCase
+import com.emirhan.socialapp.domain.use_case.home.GetStoriesUseCase
 import com.emirhan.socialapp.presentation.home.model.PostState
 import com.emirhan.socialapp.presentation.home.model.StoryState
 import dagger.hilt.android.lifecycle.HiltViewModel

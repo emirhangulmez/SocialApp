@@ -6,6 +6,7 @@ import com.emirhan.socialapp.data.network.LoginDataSourceImpl
 import com.emirhan.socialapp.data.repository.HomeRepositoryImpl
 import com.emirhan.socialapp.data.repository.LoginRepositoryImpl
 import com.emirhan.socialapp.domain.network.ConnectivityObserver
+import com.emirhan.socialapp.domain.network.LoginDataSource
 import com.emirhan.socialapp.domain.repository.HomeRepository
 import com.emirhan.socialapp.domain.repository.LoginRepository
 import com.emirhan.socialapp.domain.utils.NetworkConnectivityObserver
@@ -35,7 +36,7 @@ class AppModule {
     fun provideLoginDataSource(
         firestore: FirebaseFirestore,
         auth: FirebaseAuth
-    ) = LoginDataSourceImpl(auth, firestore)
+    ): LoginDataSource = LoginDataSourceImpl(auth, firestore)
 
     @Provides
     @Singleton

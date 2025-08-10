@@ -1,4 +1,4 @@
-package com.emirhan.socialapp.domain.use_cases.home
+package com.emirhan.socialapp.domain.use_case.home
 
 import com.emirhan.socialapp.core.Resource
 import com.emirhan.socialapp.domain.model.Post
