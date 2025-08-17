@@ -20,4 +20,6 @@ interface LoginRepository {
     fun signOut()
 
     suspend fun authenticateWithPasskey(): Credential?
+
+    suspend fun registerWithPasskey(username: String): FirebaseUser?
 }

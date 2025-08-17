@@ -48,6 +48,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.emirhan.socialapp.core.Constants
+import com.emirhan.socialapp.core.Constants.Companion.ADD_PASSKEY_BUTTON
 import com.emirhan.socialapp.core.Constants.Companion.DESC_HIDE_PASSWORD
 import com.emirhan.socialapp.core.Constants.Companion.DESC_SHOW_PASSWORD
 import com.emirhan.socialapp.core.Constants.Companion.EMAIL_PLACEHOLDER
@@ -106,6 +107,29 @@ fun ProfileCardUI(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        Text(
+            text = viewModel.loginState.value.user?.email ?: "User",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        if (LocalContext.current.checkCompatibleWithCredentialManager()) {
+            Button(
+                modifier = Modifier.widthIn(min = 250.dp),
+                onClick = viewModel::signOut,
+                shape = MaterialTheme.shapes.small,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ManageAccounts,
+                    contentDescription = null, // Decorative icon, no need for description
+                    modifier = Modifier.padding(end = 8.dp),
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+                Text(
+                    text = ADD_PASSKEY_BUTTON,
+                )
+            }
+        }
         TextButton(onClick = viewModel::signOut) {
             Text(text = LOG_OUT_BUTTON)
         }

@@ -118,7 +118,7 @@ class LoginViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     if (result.data is PasswordCredential) {
-                        println( "PASSKEY -> ${(result.data).password} ${(result.data).id}")
+                        println( "PASSKEY -> ${(result.data).password} ${(result.data)}")
                     }
                 }
 

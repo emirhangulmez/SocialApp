@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SocialApp</string>
+    <string name="asset_statements" translatable="false">
+[{
+  \"include\": \"https://3000-firebase-mobilexcelerate-1753614601129.cluster-jbb3mjctu5cbgsi6hwq6u4btwe.cloudworkstations.dev/.well-known/assetlinks.json\"
+}]
+</string>
 </resources>

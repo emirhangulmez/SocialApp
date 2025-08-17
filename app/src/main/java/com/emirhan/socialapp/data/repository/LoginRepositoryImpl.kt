@@ -35,4 +35,5 @@ class LoginRepositoryImpl @Inject constructor(
     override fun signOut() = dataSource.signOut()
 
     override suspend fun authenticateWithPasskey() = dataSource.authenticateWithPasskey()
+    override suspend fun registerWithPasskey(username: String): FirebaseUser? = dataSource.registerWithPasskey(username)
 }

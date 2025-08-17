@@ -98,8 +98,11 @@ dependencies {
     implementation "com.google.accompanist:accompanist-swiperefresh:$swipe_refresh"
     // Shimmer Effect for Compose
     implementation("com.valentinilk.shimmer:compose-shimmer:$shimmer_version")
-    // Credentials API
+    //Authentication with Credential Manager
     implementation("androidx.credentials:credentials:1.5.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
+    implementation('com.google.android.gms:play-services-auth:21.4.0')
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
 
 }
